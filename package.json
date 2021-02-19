@@ -1,0 +1,24 @@
+{
+	"name": "dolby-cinemaprocessor",
+	"version": "1.0.0",
+	"api_version": "1.0.0",
+	"keywords": [ "Cinema", "Processor" ],
+	"manufacturer": "Dolby",
+	"product": "Cinema Processor",
+	"shortname": "cinemaprocessor",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bitfocus/companion-module-dolby-cinemaprocessor.git"
+	},
+	"author": "Joseph Adams <josephdadams@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/bitfocus/companion-module-dolby-cinemaprocessor/issues"
+	},
+	"homepage": "https://github.com/bitfocus/companion-module-dolby-cinemaprocessor#readme"
+}
