@@ -201,6 +201,7 @@ instance.prototype.destroy = function() {
 	//destroy timers
 	if (self.TIMER_FADER !== null) {
 		clearInterval(this.TIMER_FADER);
+		self.TIMER_FADER = null;
 	}
 
 	debug('destroy', self.id);
@@ -251,15 +252,12 @@ instance.prototype.actions = function() {
 			label: 'Set Fader to Level',
 			options: [
 				{
-					type: 'number',
+					type: 'textinput',
 					label: 'Level',
 					id: 'level',
-					tooltip: 'Sets the level to a specific value (0-100)',
-					min: 0,
-					max: 100,
-					default: 85,
-					required: true,
-					range: true
+					tooltip: 'Sets the level to a specific value (0.0-10.0)',
+					default: '8.5',
+					required: true
 				}
 			]
 		},
@@ -314,7 +312,7 @@ instance.prototype.action = function(action) {
 			self.Fader_Timer('decrease', 'stop', null);
 			break;
 		case 'fader_setlevel':
-			cmd = 'fader_level=' + options.level;
+			cmd = 'fader_level=' + (parseFloat(options.level) * 10); //the protocol requires it in 10 but the display uses decimals. i.e. 1.8 = 18
 			break;
 		case 'set_format_button':
 			cmd = 'format_button=' + options.format;
@@ -370,6 +368,7 @@ instance.prototype.Fader_Timer = function(direction, mode, rate) {
 
 	if (self.TIMER_FADER !== null) {
 		clearInterval(self.TIMER_FADER);
+		self.TIMER_FADER = null;
 	}
 
 	if (mode === 'start') {
@@ -384,7 +383,8 @@ instance.prototype.processFeedback = function(data) {
 	switch(cmdValue[0]) {
 		case 'fader_level':
 			self.FADER_LEVEL = parseInt(cmdValue[1]);
-			self.setVariable('fader_level', self.FADER_LEVEL);
+			let displayLevel = (self.FADER_LEVEL / 10).toFixed(1);
+			self.setVariable('fader_level', displayLevel); //divide by 10 so 18 becomes 1.8, etc.
 			break;
 		case 'mute':
 			if (cmdValue[1] === '0') {
