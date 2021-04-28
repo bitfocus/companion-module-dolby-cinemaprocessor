@@ -1,10 +1,10 @@
 ## Dolby Digital Cinema Processor
 
-This module will allow you to control a Dolby Digital Cinema Processor, specifically the CP650.
+This module will allow you to control a Dolby Digital Cinema Processor, specifically the CP650 and CP950.
 
 ### Configuration
 * Enter the IP address of the device in the configuration settings.
-* The device will use TCP port 61412.
+* The device will use TCP port 61412 (CP650 model) or port 61408 (CP950 model).
 
 **Available actions:**
 * Increase Fader Level 1 Point and Stop
