@@ -98,23 +98,23 @@ instance.prototype.init_tcp = function() {
 				self.socket.send(cmd);
 			}
 			else if (self.config.model === 'cp950') {
-                cmd = 'sys.fader ?';
+				cmd = 'sys.fader ?';
 				self.socket.send(cmd);
-                
-                setTimeout(function () {
-                    cmd = 'sys.mute ?';
-                    self.socket.send(cmd);    
-                }, 500);
+				
+				setTimeout(function () {
+					cmd = 'sys.mute ?';
+					self.socket.send(cmd);
+				}, 500);
 
-				 setTimeout(function () {
-                    cmd = 'sys.macro_preset ?';
-                    self.socket.send(cmd);    
-                }, 1000);
-                
-                 setTimeout(function () {
-                    cmd = 'sys.macro_name ?';
-                    self.socket.send(cmd);    
-                }, 1500);
+				setTimeout(function () {
+					cmd = 'sys.macro_preset ?';
+					self.socket.send(cmd);
+				}, 1000);
+				
+				setTimeout(function () {
+					cmd = 'sys.macro_name ?';
+					self.socket.send(cmd);
+				}, 1500);
 			}
 		});
 
@@ -611,8 +611,8 @@ instance.prototype.processFeedback = function(data) {
 	}
 	else if (self.config.model === 'cp950') {
 		data = data.trim()
-        let cmdString = data.substring(0, data.indexOf(' '));
-        let cmdValue = data.substring(data.indexOf(' ')+1);
+		let cmdString = data.substring(0, data.indexOf(' '));
+		let cmdValue = data.substring(data.indexOf(' ') + 1);
 
 		switch(cmdString) {
 			case 'sys.fader':
