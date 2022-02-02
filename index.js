@@ -439,10 +439,10 @@ instance.prototype.actions = function() {
 
 	switch(self.config.model) {
 		case 'cp650':
-			self.system.emit('instance_actions', self.id, actions_cp650);
+			self.setActions(actions_cp650);
 			break;
 		case 'cp950':
-			self.system.emit('instance_actions', self.id, actions_cp950);
+			self.setActions(actions_cp950);
 			break;
 	}
 };
