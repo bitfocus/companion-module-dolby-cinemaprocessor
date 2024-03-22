@@ -37,21 +37,37 @@ module.exports = {
 					cmd = 'all=?\r\n'
 					self.socket.send(cmd)
 				} else {
-					cmd = 'sys.fader ?'
+					let prefix = ''
+					if (self.config.model === 'cp750') {
+						prefix = 'cp750.'
+					}
+					cmd = prefix + 'sys.fader ?'
 					self.socket.send(cmd)
 
 					setTimeout(function () {
-						cmd = 'sys.mute ?'
+						let prefix = ''
+						if (self.config.model === 'cp750') {
+							prefix = 'cp750.'
+						}
+						cmd = prefix + 'sys.mute ?'
 						self.socket.send(cmd)
 					}, 500)
 
 					setTimeout(function () {
-						cmd = 'sys.macro_preset ?'
+						let prefix = ''
+						if (self.config.model === 'cp750') {
+							prefix = 'cp750.'
+						}
+						cmd = prefix + 'sys.macro_preset ?'
 						self.socket.send(cmd)
 					}, 1000)
 
 					setTimeout(function () {
-						cmd = 'sys.macro_name ?'
+						let prefix = ''
+						if (self.config.model === 'cp750') {
+							prefix = 'cp750.'
+						}
+						cmd = prefix + 'sys.macro_name ?'
 						self.socket.send(cmd)
 					}, 1500)
 				}
@@ -67,7 +83,7 @@ module.exports = {
 	sendCommand: function (cmd) {
 		let self = this
 
-		if (self.socket !== undefined && self.socket.connected) {
+		if (self.socket !== undefined && self.socket.isConnected) {
 			self.socket.send(cmd + '\r\n')
 		} else {
 			self.log('error', 'Socket not connected :(')
@@ -93,7 +109,11 @@ module.exports = {
 			if (self.config.model === 'cp650') {
 				cmd = 'fader_level=' + newLevel
 			} else {
-				cmd = 'sys.fader ' + newLevel
+				let prefix = ''
+				if (self.config.model === 'cp750') {
+					prefix = 'cp750.'
+				}
+				cmd = prefix + 'sys.fader ' + newLevel
 			}
 
 			if (cmd) {
@@ -150,7 +170,7 @@ module.exports = {
 			}
 		} else {
 			data = data.trim()
-			let cmdString = data.substring(0, data.indexOf(' '))
+			let cmdString = data.substring(0, data.indexOf(' ')).replace('cp750.', '')
 			let cmdValue = data.substring(data.indexOf(' ') + 1)
 
 			switch (cmdString) {

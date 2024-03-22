@@ -88,7 +88,11 @@ module.exports = {
 				if (self.config.model === 'cp650') {
 					cmd = 'fader_level=' + level
 				} else {
-					cmd = 'sys.fader ' + level
+					let prefix = ''
+					if (self.config.model === 'cp750') {
+						prefix = 'cp750.'
+					}
+					cmd = prefix + 'sys.fader ' + level
 				}
 
 				self.sendCommand(cmd)
@@ -130,7 +134,11 @@ module.exports = {
 					},
 				],
 				callback: async function (action) {
-					let cmd = 'sys.macro_preset ' + action.options.macro
+					let prefix = ''
+					if (self.config.model === 'cp750') {
+						prefix = 'cp750.'
+					}
+					let cmd = prefix + 'sys.macro_preset ' + action.options.macro
 					self.sendCommand(cmd)
 				},
 			}
@@ -148,7 +156,11 @@ module.exports = {
 					},
 				],
 				callback: async function (action) {
-					let cmd = 'sys.macro_name ' + (await self.parseVariablesInString(action.options.macro))
+					let prefix = ''
+					if (self.config.model === 'cp750') {
+						prefix = 'cp750.'
+					}
+					let cmd = prefix + 'sys.macro_name ' + (await self.parseVariablesInString(action.options.macro))
 					self.sendCommand(cmd)
 				},
 			}
@@ -163,7 +175,11 @@ module.exports = {
 				if (self.config.model === 'cp650') {
 					cmd = 'mute=1'
 				} else {
-					cmd = 'sys.mute 1'
+					let prefix = ''
+					if (self.config.model === 'cp750') {
+						prefix = 'cp750.'
+					}
+					cmd = prefix + 'sys.mute 1'
 				}
 
 				self.sendCommand(cmd)
@@ -179,7 +195,11 @@ module.exports = {
 				if (self.config.model === 'cp650') {
 					cmd = 'mute=0'
 				} else {
-					cmd = 'sys.mute 0'
+					let prefix = ''
+					if (self.config.model === 'cp750') {
+						prefix = 'cp750.'
+					}
+					cmd = prefix + 'sys.mute 0'
 				}
 
 				self.sendCommand(cmd)
@@ -195,7 +215,20 @@ module.exports = {
 				if (self.config.model === 'cp650') {
 					cmd = 'mute=2'
 				} else {
-					cmd = 'sys.mute 2'
+					//determine current mute state and send opposite
+					if (self.MUTE_STATUS === true) {
+						let prefix = ''
+						if (self.config.model === 'cp750') {
+							prefix = 'cp750.'
+						}
+						cmd = prefix + 'sys.mute 0'
+					} else {
+						let prefix = ''
+						if (self.config.model === 'cp750') {
+							prefix = 'cp750.'
+						}
+						cmd = prefix + 'sys.mute 1'
+					}
 				}
 
 				self.sendCommand(cmd)
