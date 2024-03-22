@@ -1,27 +1,31 @@
 {
 	"name": "dolby-cinemaprocessor",
-	"version": "1.1.1",
-	"api_version": "1.0.0",
-	"keywords": [
-		"Cinema",
-		"Processor"
-	],
-	"manufacturer": "Dolby",
-	"product": "Cinema Processor",
-	"shortname": "cinemaprocessor",
-	"description": "",
+	"version": "2.0.0",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"format": "prettier -w .",
+		"lint:raw": "eslint --ext .ts --ext .js --ignore-pattern dist --ignore-pattern pkg",
+		"lint": "yarn lint:raw ."
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/bitfocus/companion-module-dolby-cinemaprocessor.git"
 	},
-	"author": "Joseph Adams <josephdadams@gmail.com>",
 	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/bitfocus/companion-module-dolby-cinemaprocessor/issues"
+	"dependencies": {
+		"@companion-module/base": "~1.6.0"
 	},
-	"homepage": "https://github.com/bitfocus/companion-module-dolby-cinemaprocessor#readme"
+	"devDependencies": {
+		"@companion-module/tools": "^1.4.1"
+	},
+	"prettier": "@companion-module/tools/.prettierrc.json",
+	"lint-staged": {
+		"*.{css,json,md,scss}": [
+			"prettier --write"
+		],
+		"*.{ts,tsx,js,jsx}": [
+			"yarn lint:raw --fix"
+		]
+	}
 }
