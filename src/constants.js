@@ -1,9 +1,9 @@
 module.exports = {
 	MODELS: [
-		{ id: 'cp650', label: 'CP650' },
-		{ id: 'cp750', label: 'CP750' },
-		{ id: 'cp850', label: 'CP850' },
-		{ id: 'cp950', label: 'CP950' },
+		{ id: 'cp650', label: 'CP650', port: 61412 },
+		{ id: 'cp750', label: 'CP750', port: 61408 },
+		{ id: 'cp850', label: 'CP850', port: 61408 },
+		{ id: 'cp950', label: 'CP950', port: 61408 },
 	],
 
 	CHOICES_FORMATS: [

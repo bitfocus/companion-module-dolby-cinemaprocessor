@@ -10,17 +10,14 @@ module.exports = {
 			delete self.socket
 		}
 
-		if (self.config.port === undefined) {
-			switch (self.config.model) {
-				case 'cp650':
-					self.config.port = 61412
-					break
-				case 'cp750':
-				case 'cp850':
-				case 'cp950':
-					self.config.port = 61408
-					break
-			}
+		//get port from model
+		let modelObj = self.MODELS.find(({ id }) => id === self.config.model)
+
+		if (modelObj) {
+			self.config.port = modelObj.port
+		} else {
+			//assume cp750
+			self.config.port = 61408
 		}
 
 		if (self.config.host && self.config.port) {
